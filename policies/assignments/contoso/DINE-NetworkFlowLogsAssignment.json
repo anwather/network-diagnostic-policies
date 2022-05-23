@@ -3,16 +3,16 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "topLevelManagementGroupPrefix": {
-            "value": "dof"
+            "value": "contoso"
         },
         "aeStorageAccountId": {
-            "value": "/subscriptions/7397f5d2-c4bc-4696-91d6-3894f684ef38/resourceGroups/monitoring/providers/Microsoft.Storage/storageAccounts/dofnsgflmonae001"
+            "value": ""
         },
         "aseStorageAccountId": {
-            "value": "/subscriptions/7397f5d2-c4bc-4696-91d6-3894f684ef38/resourceGroups/monitoring/providers/Microsoft.Storage/storageAccounts/dofnsgflmonase001"
+            "value": ""
         },
         "logAnalyticsWorkspaceId": {
-            "value": "/subscriptions/7397f5d2-c4bc-4696-91d6-3894f684ef38/resourcegroups/monitoring/providers/microsoft.operationalinsights/workspaces/dof-la-ae-001"
+            "value": ""
         }
     }
 }
