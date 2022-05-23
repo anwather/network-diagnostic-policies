@@ -1,0 +1,5 @@
+{
+    "tenantId": "", // Add tenant ID
+    "defaultLocation": "", // Default location for deployment objects
+    "topLevelManagementGroupId": "contoso" // Top level management group id
+}

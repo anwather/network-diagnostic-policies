@@ -1,0 +1,123 @@
+{
+    "Description": "This policy initiative is a group of policies that deploy networking diagnostics",
+    "DisplayName": "Deploy Networking Diagnostics",
+    "Parameters": {
+        "profileName": {
+            "type": "String",
+            "metadata": {
+                "displayName": "Profile Name for Config",
+                "description": "The profile name Azure Diagnostics"
+            },
+            "defaultValue": "setByPolicy"
+        },
+        "logAnalytics": {
+            "type": "string",
+            "metadata": {
+                "displayName": "logAnalytics",
+                "description": "The target Log Analytics Workspace for Azure Diagnostics",
+                "strongType": "omsWorkspace"
+            }
+        },
+        "azureRegions": {
+            "type": "Array",
+            "metadata": {
+                "displayName": "Allowed Locations",
+                "description": "The list of locations that can be specified when deploying resources",
+                "strongType": "location"
+            }
+        }
+    },
+    "PolicyDefinitionGroups": null,
+    "PolicyDefinitions": [
+        {
+            "policyDefinitionReferenceId": "enable-firewall-diagnostics",
+            "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/contoso/providers/Microsoft.Authorization/policyDefinitions/enable-firewall-diagnostics",
+            "parameters": {
+                "profileName": {
+                    "value": "[parameters('profileName')]"
+                },
+                "logAnalytics": {
+                    "value": "[parameters('logAnalytics')]"
+                },
+                "azureRegions": {
+                    "value": "[parameters('azureRegions')]"
+                }
+            }
+        },
+        {
+            "policyDefinitionReferenceId": "enable-nic-diagnostics",
+            "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/contoso/providers/Microsoft.Authorization/policyDefinitions/enable-nic-diagnostics",
+            "parameters": {
+                "profileName": {
+                    "value": "[parameters('profileName')]"
+                },
+                "logAnalytics": {
+                    "value": "[parameters('logAnalytics')]"
+                },
+                "azureRegions": {
+                    "value": "[parameters('azureRegions')]"
+                }
+            }
+        },
+        {
+            "policyDefinitionReferenceId": "enable-nsg-diagnostics",
+            "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/contoso/providers/Microsoft.Authorization/policyDefinitions/enable-nsg-diagnostics",
+            "parameters": {
+                "profileName": {
+                    "value": "[parameters('profileName')]"
+                },
+                "logAnalytics": {
+                    "value": "[parameters('logAnalytics')]"
+                },
+                "azureRegions": {
+                    "value": "[parameters('azureRegions')]"
+                }
+            }
+        },
+        {
+            "policyDefinitionReferenceId": "enable-publicip-diagnostics",
+            "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/contoso/providers/Microsoft.Authorization/policyDefinitions/enable-publicip-diagnostics",
+            "parameters": {
+                "profileName": {
+                    "value": "[parameters('profileName')]"
+                },
+                "logAnalytics": {
+                    "value": "[parameters('logAnalytics')]"
+                },
+                "azureRegions": {
+                    "value": "[parameters('azureRegions')]"
+                }
+            }
+        },
+        {
+            "policyDefinitionReferenceId": "enable-vnet-diagnostics",
+            "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/contoso/providers/Microsoft.Authorization/policyDefinitions/enable-vnet-diagnostics",
+            "parameters": {
+                "profileName": {
+                    "value": "[parameters('profileName')]"
+                },
+                "logAnalytics": {
+                    "value": "[parameters('logAnalytics')]"
+                },
+                "azureRegions": {
+                    "value": "[parameters('azureRegions')]"
+                }
+            }
+        },
+        {
+            "policyDefinitionReferenceId": "enable-vpngw-diagnostics",
+            "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/contoso/providers/Microsoft.Authorization/policyDefinitions/enable-vpngw-diagnostics",
+            "parameters": {
+                "profileName": {
+                    "value": "[parameters('profileName')]"
+                },
+                "logAnalytics": {
+                    "value": "[parameters('logAnalytics')]"
+                },
+                "azureRegions": {
+                    "value": "[parameters('azureRegions')]"
+                }
+            }
+        }
+    ]
+}

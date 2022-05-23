@@ -1,0 +1,74 @@
+{
+    "Description": "Deploy NSG flow logs to the management subscription",
+    "DisplayName": "Deploy NSG Flow Logs",
+    "Metadata": {
+        "category": "Network"
+    },
+    "Parameters": {
+        "aeStorageAccountId": {
+            "type": "string",
+            "metadata": {
+                "displayName": "AE StorageAccount Id"
+            }
+        },
+        "aseStorageAccountId": {
+            "type": "string",
+            "metadata": {
+                "displayName": "ASE Storage Account Id"
+            }
+        },
+        "logAnalyticsWorkspaceId": {
+            "type": "string",
+            "metadata": {
+                "displayName": "Log Analytics Workspace Id"
+            }
+        }
+    },
+    "PolicyDefinitionGroups": [],
+    "PolicyDefinitions": [
+        {
+            "policyDefinitionReferenceId": "flow_log_ase",
+            "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/contoso/providers/Microsoft.Authorization/policyDefinitions/deploy-nsgflowlogs-la",
+            "parameters": {
+                "nsgRegion": {
+                    "value": "australiasoutheast"
+                },
+                "storageId": {
+                    "value": "[parameters('aseStorageAccountId')]"
+                },
+                "networkWatcherRG": {
+                    "value": "NetworkWatcherRG"
+                },
+                "networkWatcherName": {
+                    "value": "NetworkWatcher_australiasoutheast"
+                },
+                "logAnalyticsWorkspaceId": {
+                    "value": "[parameters('logAnalyticsWorkspaceId')]"
+                }
+            },
+            "groupNames": []
+        },
+        {
+            "policyDefinitionReferenceId": "flow_log_ae",
+            "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/contoso/providers/Microsoft.Authorization/policyDefinitions/deploy-nsgflowlogs-la",
+            "parameters": {
+                "nsgRegion": {
+                    "value": "australiaeast"
+                },
+                "storageId": {
+                    "value": "[parameters('aeStorageAccountId')]"
+                },
+                "networkWatcherRG": {
+                    "value": "NetworkWatcherRG"
+                },
+                "networkWatcherName": {
+                    "value": "NetworkWatcher_australiaeast"
+                },
+                "logAnalyticsWorkspaceId": {
+                    "value": "[parameters('logAnalyticsWorkspaceId')]"
+                }
+            },
+            "groupNames": []
+        }
+    ]
+}

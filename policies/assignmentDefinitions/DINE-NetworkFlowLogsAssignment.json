@@ -1,0 +1,70 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-08-01/managementGroupDeploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "topLevelManagementGroupPrefix": {
+            "type": "string"
+        },
+        "aeStorageAccountId": {
+            "type": "string"
+        },
+        "aseStorageAccountId": {
+            "type": "string"
+        },
+        "logAnalyticsWorkspaceId": {
+            "type": "string"
+        }
+    },
+    "functions": [],
+    "variables": {
+        "policyDetails": {
+            "policyDefinitionId": "[concat('/providers/Microsoft.Management/managementGroups/', parameters('topLevelManagementGroupPrefix'), '/providers/Microsoft.Authorization/policySetDefinitions/Deploy-NSGFlowLogs')]",
+            "name": "Deploy-NSGFlowLogs",
+            "displayName": "Deploy NSG Flow Logs",
+            "description": "This initiative deploys NSG flow logs to multiple regions"
+        },
+        "roleDefinitionId": "b24988ac-6180-42a0-ab88-20f7382dd24c"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Authorization/policyassignments",
+            "apiVersion": "2021-06-01",
+            "name": "[variables('policyDetails').name]",
+            "location": "[deployment().location]",
+            "identity": {
+                "type": "SystemAssigned"
+            },
+            "properties": {
+                "displayName": "[variables('policyDetails').displayName]",
+                "description": "[variables('policyDetails').description]",
+                "enforcementMode": "Default",
+                "policyDefinitionId": "[variables('policyDetails').policyDefinitionId]",
+                "parameters": {
+                    "aeStorageAccountId": {
+                        "value": "[parameters('aeStorageAccountId')]"
+                    },
+                    "aseStorageAccountId": {
+                        "value": "[parameters('aseStorageAccountId')]"
+                    },
+                    "logAnalyticsWorkspaceId": {
+                        "value": "[parameters('logAnalyticsWorkspaceId')]"
+                    }
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Authorization/roleAssignments",
+            "apiVersion": "2020-10-01-preview",
+            "name": "[guid(concat(parameters('topLevelManagementGroupPrefix'),'-',variables('policyDetails').name))]",
+            "properties": {
+                "principalId": "[toLower(reference(concat('/providers/Microsoft.Authorization/policyAssignments/', variables('policyDetails').name), '2019-09-01', 'Full' ).identity.principalId)]",
+                "principalType": "ServicePrincipal",
+                "roleDefinitionId": "[concat('/providers/Microsoft.Authorization/roleDefinitions/', variables('roleDefinitionId'))]"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Authorization/policyassignments', variables('policyDetails').name)]"
+            ]
+        }
+    ],
+    "outputs": {}
+}
